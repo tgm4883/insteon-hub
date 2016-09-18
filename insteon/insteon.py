@@ -6,7 +6,7 @@ import sys
 import requests
 from .authorization import InsteonAuthorizer
 from .api import InsteonAPI, APIError
-from .resources import House, Account, Contact, Device
+from .resources import House, Account, Contact, Device, Scene, Room
 from .const import __version__
 
 class Insteon(object):
@@ -22,8 +22,8 @@ class Insteon(object):
         self.houses = House.all(House, self.api)
         self.devices = Device.all(Device, self.api)
         #self.cameras = []
-        #self.scenes = []
-        #self.rooms = []
+        self.scenes = Scene.all(Scene, self.api)
+        self.rooms = Room.all(Room, self.api)
         self.contacts = Contact.all(Contact, self.api)
         #self.alerts = []
         #self.commands = []

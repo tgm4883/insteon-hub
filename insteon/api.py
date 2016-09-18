@@ -40,7 +40,7 @@ class InsteonAPI(object):
 
     def put(self, path, data={}):
         '''Perform PUT Request'''
-        response = requests.put(API_URL + path, data=json.dumps(data), headers=setup_headers())
+        response = requests.put(API_URL + path, data=json.dumps(data), headers=self._set_headers())
         return self._check_response(response, self.put, path, data)
 
     def delete(self, path, data={}):
@@ -144,7 +144,8 @@ class InsteonResource(object):
         for settable_name in self._settables:
             data[settable_name] = getattr(self, settable_name)
         try:
-            return self._api_iface.put(base_path + resource_name + "/" + str(self._resource_id))
+            print('save?')
+            return self._api_iface.put(self.base_path + self.resource_name + "/" + str(self._resource_id), data=data)
         except APIError as e:
             print("API error: ")
             for key,value in e.data.items():
@@ -181,7 +182,7 @@ class InsteonCommandable(InsteonResource):
                     time.sleep(0.4)
                     command_info = self._api_iface.get(self.base_path + self.command_path + "/" + str(commandId))
                     commandStatus = command_info['status']
-        
+
             return command_info
         except APIError as e:
             print("API error: executing command " + str(command) + " on " + self.DeviceName)

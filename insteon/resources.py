@@ -64,3 +64,27 @@ class Device(InsteonCommandable):
         except yaml.YAMLError:
             return "No Category"
         return categories.get('dev_cat', {}).get(self.DevCat, "No Category")
+
+class Room(InsteonResource):
+    resource_name="rooms"
+    _settables = (
+        'HouseID', 'RoomName', 'Icon', 'Visible', 'Favorite', 'DefaultCamera', 'CameraList',
+        'DeviceList', 'SceneList'
+    )
+    _properties = (
+        'HouseID', 'RoomName', 'Icon', 'Visible', 'Favorite', 'DefaultCamera', 'CameraList',
+        'DeviceList', 'SceneList'
+    )
+
+class Scene(InsteonResource):
+    resource_name="scenes"
+    _settables = (
+        'HouseID', 'SceneName', 'StatusDevice', 'OnTime', 'OffTime', 'CustomOn', 'CustomOff',
+        'Group', 'IconID', 'Visible', 'Favorite', 'AutoStatus', 'DayMask', 'TimerEnabled',
+        'EnableCustomOn', 'EnableCustomOff', 'DeviceList'
+    )
+    _properties = (
+        'HouseID', 'SceneName', 'StatusDevice', 'OnTime', 'OffTime', 'CustomOn', 'CustomOff',
+        'Group', 'IconID', 'Visible', 'Favorite', 'AutoStatus', 'DayMask', 'TimerEnabled',
+        'EnableCustomOn', 'EnableCustomOff', 'DeviceList'
+    )
