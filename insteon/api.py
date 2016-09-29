@@ -144,7 +144,6 @@ class InsteonResource(object):
         for settable_name in self._settables:
             data[settable_name] = getattr(self, settable_name)
         try:
-            print('save?')
             return self._api_iface.put(self.base_path + self.resource_name + "/" + str(self._resource_id), data=data)
         except APIError as e:
             print("API error: ")
